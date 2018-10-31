@@ -1,0 +1,253 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Side NAVIGATION
+.sidebar {
+background-color: var(--color-grey-dark-1);
+flex-direction: column;
+display: flex;
+justify-content: space-between;
+min-height: 50rem;
+width: 15%;
+
+}
+
+.side-nav {
+  font-size: 1.4rem;
+  list-style: none;
+  margin-top: 1.5rem;
+
+  @media only screen and (max-width: $bp-medium) {
+      display: flex;
+      margin: 0;
+    }
+
+
+    &__item {
+    position: relative;
+
+    &:not(:last-child) {
+      margin-bottom: .3rem;
+      @media only screen and (max-width: $bp-medium) {
+          margin: 0;
+        }
+    }
+
+    @media only screen and (max-width: $bp-medium) {
+        flex: 1;
+      }
+
+  }
+
+  &__item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 3px;
+    background-color: var(--color-primary);
+    transform: scaleY(0);
+
+    transition: transform .2s,
+                width .4s cubic-bezier(1,0,0,1).2s,
+                background-color .1s;
+  }
+
+  &__item:hover::before,
+  &__item--active::before {
+    transform: scaleY(1);
+    width: 100%;
+  }
+
+  &__item:active::before {
+    background-color: var(--color-primary-light);
+  }
+
+    &__button  {
+      position: relative;
+      z-index: 10; //z index only works when position is specified
+      color: var(--color-grey-light-1);
+      text-decoration: none;
+      text-transform: uppercase;
+      display: block;
+      padding: 1.5rem 3rem;
+      cursor: pointer;
+
+      display: flex;
+      align-items: center;
+
+      @media only screen and (max-width: $bp-medium) {
+          justify-content: center;
+          padding: 2rem;
+        }
+
+        @media only screen and (max-width: $bp-small) {
+            flex-direction: column;
+            padding: 1.5rem .5rem;
+          }
+  }
+
+
+  &__icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-right: 2rem;
+    fill: currentColor; //Color of the parent element
+
+    @media only screen and (max-width: $bp-small) {
+        margin-right: 0;
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+  }
+
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Form
+.form-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 1rem 2rem;
+  align-items: stretch;
+  &__row{
+    display: flex;
+    position: relative;
+  }
+}
+
+.form-style{
+  display: flex;
+    flex-direction: column;
+    min-height: 18rem;
+    padding: 1rem;
+    background: #FFFFFF;
+    width: 100%;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -moz-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    -webkit-box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.22);
+    margin-bottom: 5rem;
+
+  & h2{
+  	background: var(--color-grey-dark-1);
+  	text-transform: uppercase;
+  	color: var(--color-grey-light-1);
+  	font-size: 1.8rem;
+  	font-weight: 100;
+
+  }
+    &__inputs{
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    height: 100%;
+    &-input
+    {
+      outline: none;
+    display: block;
+    width: 30%;
+    padding: 7px;
+    border: none;
+    border-bottom: 1px solid #ddd;
+    background: transparent;
+    margin-bottom: 1.5rem;
+    margin-right: 5rem;
+    font: 16px Arial, Helvetica, sans-serif;
+    height: 4.5rem;
+    }
+    & textarea{
+    	resize:none;
+    	overflow: hidden;
+    }
+  }
+  &__row--bg{
+    height: auto;
+    width: 82%;
+    display: flex;
+    flex-wrap: wrap;
+    &-full{
+      width: 100%;
+    }
+  }
+  &__row--sm{
+    width: 18%;
+    display: flex;
+    align-items: flex-start;
+    &-hidden{
+      display: none;
+    }
+  }
+}
+
+/////////////////////////////////////////////////////////////////////////////////////
+////DELETE BUTTON
+
+.delete-button{
+      position: absolute;
+      top: 9px;
+      right: 12px;
+      height: 28px;
+      display: inline-block;
+      cursor: pointer;
+      color: var(--color-grey-light-1);
+      font-size: 2rem;
+      outline: none;
+      border-radius: 23%;
+      -webkit-transition: all .2s;
+      transition: all .2s;
+      align-self: center;
+&:hover {
+  color:var(--color-grey-dark-3);
+}
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////
+////// Dropdown
+.dropbtn {
+ transition: all .3s;
+}
+.dropdown {
+  float: right;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.2);
+    &:hover .dropdown-content {
+    display: block;
+  }
+  &:hover .dropbtn {
+   background-color: var(--color-primary-light);
+   color: var(--color-grey-light-1);
+ }
+ & .dropbtn {
+   font-size: 1.6rem;
+   border: none;
+   outline: none;
+   color: black;
+   padding: 1.4rem 1.6rem;
+   background-color: inherit;
+   font-family: inherit; /* Important for vertical align on mobile phones */
+   margin: 0; /* Important for vertical align on mobile phones */
+ }
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+
+  min-width: 11rem;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  &-item {
+    float: none;
+    color: var(--color-grey-dark-1);
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    font-size: 1.2rem;
+    transition: all .3s;
+    &:hover{
+    background-color: var(--color-primary-light);
+    color: var(--color-grey-light-1);
+    }
+  }
+}

@@ -1,0 +1,44 @@
+.container {
+max-width: 120rem;
+margin: 8rem auto;
+background-color: var(--color-grey-light-2);
+box-shadow: var(--shadow-dark);
+
+min-height: 50rem;
+
+@media only screen and (max-width: $bp-largest) {
+    margin: 0;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
+.header {
+  font-size: 2.8rem;
+  height: 7rem;
+  background-color: #fff;
+  border-bottom: var(--line);
+
+  text-align: center;
+  padding-top: 1rem;
+
+
+  @media only screen and (max-width: $bp-small) {
+      flex-wrap: wrap;
+      align-items: space-around;
+      height: 11rem;
+    }
+}
+
+.content {
+  display: flex;
+
+  @media only screen and (max-width: $bp-medium) {
+      flex-direction: column;
+    }
+
+}
+
+.noInput{
+  display: none;
+}
