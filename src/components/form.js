@@ -17,11 +17,13 @@ class Form extends Component {
   }
 
   handleAddInput = (e) => {
-    let inputKey = e.target.dataset.key++
+    let inputKey = e.target.dataset.key
+    let inputType = e.target.dataset.inputtype
     this.setState({
-      inputs: this.state.inputs.concat({ inputName: e.target.dataset.inputtype, key: inputKey })
+      inputs: this.state.inputs.concat({ inputName: inputType, key: inputKey })
     });
-    e.target.dataset.value++
+    e.target.dataset.key++
+    console.log(inputKey)
   }
   handleInputDelete= (input) => () => {
     this.setState({
@@ -54,7 +56,7 @@ render() {
         <div key={idx} className="fullWidth">
         {input.inputName !== null?
           <div>
-           <CustInp inType={input.inputName}/>
+           <CustInp inType={input}/>
            <span onClick={this.handleInputDelete(input)} className="form-style__inputs-delete-button">&#10006;</span>
            </div>
            :
