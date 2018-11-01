@@ -1,18 +1,11 @@
 import React, { Component } from 'react';
-import Subinp from './subinput'
-class CustInp extends Component {
+class SubInp extends Component {
 
   constructor(props, context) {
     super(props);
 
     this.state = {
-      inputType : [this.props.inType],
-      yesOrNo: [''],
-      numbers: [{
-          operator: [''],
-          value: ['']
-        }],
-      openQuestion:['']
+      inputType : [this.props.inType]
 
       };
 
@@ -23,20 +16,19 @@ class CustInp extends Component {
     console.log(prevProps)
     if (this.props !== prevProps) {
       this.setState({
-        inputType: [this.props.inType],
+        inputType: [this.props.inType]
       });
     }
   }
 
 
-
-  onHandleBooleanChange = (e) => {
+/*
+  handleAddInput = (e) => {
     this.setState({
-      yesOrNo: e.target.value
+      inputs: this.state.inputs.concat([{ inputName: e.target.innerHTML }])
     });
-    console.log(this.state.numbers)
+    console.log(this.state.inputs)
   }
-  /*
   handleInputDelete= (e, z) => () => {
     console.log(e.inputName, z)
     this.setState({
@@ -73,8 +65,8 @@ render() {
         <input type="text" placeholder="Type your question here" className ="form-style__inputs-input form-style__inputs-input-question"/>
         <div className ="form-style__inputs-input form-style__inputs-input-radio-buttons">
         <div className="form-style__inputs-input-radio-buttons-choose">Choose your desired answer</div>
-        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/><span>Yes</span></div>
-        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/><span>No</span></div>
+        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" /><span>Yes</span></div>
+        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="no" /><span>No</span></div>
         </div>
         <div className="form-style__inputs-input-dropbtn form-style__inputs-input-dropbtn">
             <div className="dropdown">
@@ -156,4 +148,4 @@ render() {
 )}
 }
 
-export default CustInp;
+export default SubInp;

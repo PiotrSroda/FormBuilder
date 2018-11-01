@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import CustInp from './input';
+import _ from 'lodash';
 
-class FormGen extends Component {
+class Form extends Component {
 
   constructor(props, context) {
     super(props);
@@ -16,15 +17,15 @@ class FormGen extends Component {
   }
 
   handleAddInput = (e) => {
+    let inputKey = e.target.dataset.key++
     this.setState({
-      inputs: this.state.inputs.concat([{ inputName: e.target.dataset.inputtype }])
+      inputs: this.state.inputs.concat({ inputName: e.target.dataset.inputtype, key: inputKey })
     });
-    console.log(this.state.inputs)
+    e.target.dataset.value++
   }
-  handleInputDelete= (e, z) => () => {
-    console.log(e.inputName, z)
+  handleInputDelete= (input) => () => {
     this.setState({
-      inputs: this.state.inputs.filter((s, sidx) => (e !== s && z !== s))
+      inputs: _.reject(this.state.inputs, input)
     });
   }
 
@@ -36,28 +37,32 @@ render() {
   return (
 
   <div className="form-style">
-    <h2>New Form</h2>
+  <h2>
+    <div className="dropdown">
+      <div className="dropbtn">+</div>
+        <div className="dropdown-content">
+          <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "boolean" data-key = "0">Yes/no question</span>
+          <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "integer" data-key = "0">Number based question</span>
+          <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "string" data-key = "0">Open question</span>
+        </div>
+    </div>
+  </h2>
     <form className = "form-style__inputs">
-      <div className="form-style__row--bg">
-      {this.state.inputs.map(
-        (input, i) => (
-        <div key={i} className="fullWidth">
-        {input.inputName !== null? <CustInp inType={input.inputName}/> : <span className="noInput"></span>}
-        {input.inputName !== null? <span onClick={this.handleInputDelete(input, i)} className="form-style__inputs-delete-button">&#10006;</span> : <div className="noInput"></div>}
+      <div className="form-style__row">
+      {_.map(this.state.inputs,(
+        (input, idx) => (
+        <div key={idx} className="fullWidth">
+        {input.inputName !== null?
+          <div>
+           <CustInp inType={input.inputName}/>
+           <span onClick={this.handleInputDelete(input)} className="form-style__inputs-delete-button">&#10006;</span>
+           </div>
+           :
+           <span className="noInput"></span>
+         }
         </div>
       )
-        )}
-
-      </div>
-      <div className="form-style__row--sm">
-        <div className="dropdown">
-          <div className="dropbtn">Choose Input</div>
-            <div className="dropdown-content">
-              <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "boolean">Yes/no question</span>
-              <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "integer">Number based question</span>
-              <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "string">Open question</span>
-            </div>
-        </div>
+    ))}
       </div>
     </form>
   </div>
@@ -66,4 +71,4 @@ render() {
 }
 }
 
-export default FormGen;
+export default Form;
