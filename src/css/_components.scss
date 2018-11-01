@@ -42,9 +42,8 @@
     flex-wrap: wrap;
     &-subinput{
       width: 100%;
-      margin-top: 4.5rem;
-      border-top: 1px solid;
-      padding-top: 2rem;
+      margin-top: 3.5rem;
+      padding-top: 0rem;
     }
     &-border{
       border: 1px solid var(--color-grey-dark-1);
@@ -63,6 +62,16 @@
       width: 100%;
       font-weight: 700;
       font-size: 3rem;
+      &-notfirst{
+        width: 100%;
+        font-weight: 700;
+        font-size: 3rem;
+      }
+    }
+    &-question-asked{
+      width: 100%;
+      font-weight: 700;
+      font-size: 3rem;
     }
     &-question{
       width: 30%;
@@ -74,6 +83,7 @@
       width: 30%;
       font-weight: 100;
       font-size: 2rem;
+      border-bottom: none;
     }
     &-dropbtn{
       outline: none;

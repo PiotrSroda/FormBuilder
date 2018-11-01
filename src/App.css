@@ -81,6 +81,9 @@ body {
   position: relative;
   width: 100%; }
 
+.relative-container {
+  position: relative; }
+
 .form-container {
   display: flex;
   flex-direction: column;
@@ -118,9 +121,8 @@ body {
     flex-wrap: wrap; }
     .form-style__inputs-subinput {
       width: 100%;
-      margin-top: 4.5rem;
-      border-top: 1px solid;
-      padding-top: 2rem; }
+      margin-top: 3.5rem;
+      padding-top: 0rem; }
     .form-style__inputs-border {
       border: 1px solid var(--color-grey-dark-1);
       padding: 3rem; }
@@ -137,6 +139,14 @@ body {
         width: 100%;
         font-weight: 700;
         font-size: 3rem; }
+        .form-style__inputs-input-title-notfirst {
+          width: 100%;
+          font-weight: 700;
+          font-size: 3rem; }
+      .form-style__inputs-input-question-asked {
+        width: 100%;
+        font-weight: 700;
+        font-size: 3rem; }
       .form-style__inputs-input-question {
         width: 30%;
         font-weight: 100;
@@ -145,7 +155,8 @@ body {
       .form-style__inputs-input-answer {
         width: 30%;
         font-weight: 100;
-        font-size: 2rem; }
+        font-size: 2rem;
+        border-bottom: none; }
       .form-style__inputs-input-dropbtn {
         outline: none;
         display: block;
