@@ -41,4 +41,15 @@ min-height: 50rem;
 
 .noInput{
   display: none;
+  opacity: hidden;
+}
+.fullWidth{
+  margin-bottom: 2rem;
+  position: relative;
+}
+.flexcontainer {
+  display: flex;
+  position: relative;
+  margin-right: 1.5rem;
+  flex-wrap: wrap;
 }

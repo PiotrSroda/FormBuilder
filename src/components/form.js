@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import CustInp from './input';
 
 class FormGen extends Component {
 
@@ -6,7 +7,7 @@ class FormGen extends Component {
     super(props);
 
     this.state = {
-      booleanForms: [{
+      inputs: [{
         inputName: null,
         key: null
       }]
@@ -16,14 +17,14 @@ class FormGen extends Component {
 
   handleAddInput = (e) => {
     this.setState({
-      booleanForms: this.state.booleanForms.concat([{ inputName: e.target.innerHTML }])
+      inputs: this.state.inputs.concat([{ inputName: e.target.dataset.inputtype }])
     });
-    console.log(this.state.booleanForms)
+    console.log(this.state.inputs)
   }
   handleInputDelete= (e, z) => () => {
     console.log(e.inputName, z)
     this.setState({
-      booleanForms: this.state.booleanForms.filter((s, sidx) => (e !== s && z !== s))
+      inputs: this.state.inputs.filter((s, sidx) => (e !== s && z !== s))
     });
   }
 
@@ -38,13 +39,11 @@ render() {
     <h2>New Form</h2>
     <form className = "form-style__inputs">
       <div className="form-style__row--bg">
-      {this.state.booleanForms.map(
+      {this.state.inputs.map(
         (input, i) => (
         <div key={i} className="fullWidth">
-        {input.inputName === "Link 1"? <input type="text" name="field1" placeholder="Full Name" className ="form-style__inputs-input"/> : <div></div>}
-        {input.inputName === "Link 2"? <input type="text" name="field1" placeholder="Mail" className ="form-style__inputs-input"/> : <div></div>}
-        {input.inputName === "Link 3"? <input type="text" name="field1" placeholder="John" className ="form-style__inputs-input"/> : <div></div>}
-        {input.inputName !== null? <span onClick={this.handleInputDelete(input, i)} className="form-style__inputs-delete-button">&#10006;</span> : <div></div>}        
+        {input.inputName !== null? <CustInp inType={input.inputName}/> : <span className="noInput"></span>}
+        {input.inputName !== null? <span onClick={this.handleInputDelete(input, i)} className="form-style__inputs-delete-button">&#10006;</span> : <div className="noInput"></div>}
         </div>
       )
         )}
@@ -52,11 +51,11 @@ render() {
       </div>
       <div className="form-style__row--sm">
         <div className="dropdown">
-          <div className="dropbtn">Dropdown</div>
+          <div className="dropbtn">Choose Input</div>
             <div className="dropdown-content">
-              <span className="dropdown-content-item" onClick={this.handleAddInput}>Link 1</span>
-              <span className="dropdown-content-item" onClick={this.handleAddInput}>Link 2</span>
-              <span className="dropdown-content-item" onClick={this.handleAddInput}>Link 3</span>
+              <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "boolean">Yes/no question</span>
+              <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "integer">Number based question</span>
+              <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "string">Open question</span>
             </div>
         </div>
       </div>
