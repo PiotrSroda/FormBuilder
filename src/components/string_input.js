@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import BooleanInput from './bollean_input';
-import IntegerInput from './integer_input';
+import SubInp from './subinputs';
 import _ from 'lodash';
+let id = 0
 
 class StringInput extends Component {
 
@@ -9,45 +9,33 @@ class StringInput extends Component {
     super(props);
 
     this.state = {
-      boolean: '',
-      integerOperator:'',
-      integerValue: null,
-      showSubInput: [{
-        id: '',
-        key: ''
-      }],
+      showSubinput: [],
       question:'',
       answer:''
     };
+    this.handleInputDelete = this.handleInputDelete.bind(this)
   }
-  handleInputDelete= (input) => () => {
-    this.setState({
-      showSubInput: _.reject(this.state.showSubInput, input)
-    });
-  }
-
-  onHandleBooleanChange = (e) => {
-    this.setState({boolean: [e.target.value]});
-  }
-
-  onHandleOperatorChange = (e) => {
-    this.setState({integerOperator: [e.target.value]});
-  }
-
   handleAddInput = (e) => {
-    let inputKey = e.target.dataset.key++
+    let inputKey = e.target.dataset.key
+    let inputType = e.target.dataset.inputtype
     this.setState({
-            showSubInput: this.state.showSubInput.concat({ id: e.target.dataset.inputtype, key: inputKey })
+      showSubinput: this.state.showSubinput.concat({ inputName: inputType, key: inputKey, id:++id})
     });
-    e.target.dataset.value++
+    e.target.dataset.key++
+    console.log(inputKey)
+  }
+  handleInputDelete = (idx) => () => {
+    let inp = this.state.showSubinput;
+    _.pullAt(inp, idx);
+    this.setState({
+      inputs: inp
+    });
   }
 
   handleQuestionChange = (question) => {
     this.setState({question});
   }
-  handleIntegerChange = (integerValue) => {
-    this.setState({integerValue});
-  }
+
   handleAnswerChange = (answer) => {
     this.setState({answer});
   }
@@ -56,7 +44,12 @@ class StringInput extends Component {
   render() {
     return (
       <div className="form-style__inputs form-style__inputs-subinput">
-          {!this.props.notFirst  ? <input type="text" placeholder="Title" className="form-style__inputs-input form-style__inputs-input-title-notfirst"/> :  <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
+          {!this.props.notFirst  ? <input type="text"
+            onChange={this.handleTitleChange}
+            placeholder="Title"
+            className="form-style__inputs-input form-style__inputs-input-title"
+            defaultValue={this.props.inType && this.props.inType.name ? this.props.inType.name : ''}
+            /> :  <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
           <input type="text" placeholder="Type your question here" className="form-style__inputs-input form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
           <input type="text" placeholder="Type your answer here" className="form-style__inputs-input form-style__inputs-input-answer" value={this.state.answer} onChange={event => this.handleAnswerChange(event.target.value)}/>
           <div className="form-style__inputs-input-dropbtn form-style__inputs-input-dropbtn">
@@ -70,41 +63,21 @@ class StringInput extends Component {
             </div>
           </div>
           {
-            this.state.showSubInput.map((sub, i) => (
+            this.state.showSubinput.map((sub, idx) => (
               <div>
               {
-                sub.id === 'boolean'
-                  ? <div className ="relative-container">
-                    <BooleanInput answer={this.state.answer} question={this.state.question} notFirst={true}/>
-                    <span onClick={this.handleInputDelete(sub)} className="form-style__inputs-delete-button">&#10006;</span>
-                    </div>
-                  : <span className="noInput"></span>
-              }
-            </div>
-          ))
-          }
-          {
-            this.state.showSubInput.map((sub, i) => (
-              <div>
-              {
-                sub.id === 'integer'
-                  ? <div className ="relative-container">
-                    <IntegerInput answer={this.state.answer} question={this.state.question} notFirst={true}/>
-                    <span onClick={this.handleInputDelete(sub)} className="form-style__inputs-delete-button">&#10006;</span>
-                    </div>
-                  : <span className="noInput"></span>
-              }
-            </div>
-          ))
-          }
-          {
-            this.state.showSubInput.map((sub, i) => (
-              <div>
-              {
-                sub.id === 'string'
-                  ? <div className ="relative-container">
-                    <StringInput answer={this.state.answer} question={this.state.question} notFirst={true}/>
-                    <span onClick={this.handleInputDelete(sub)} className="form-style__inputs-delete-button">&#10006;</span>
+                sub.inputName !== null
+                  ?
+                    <div className="relative-container">
+                    <SubInp
+                      subInType={sub}
+                      idx={idx}
+                      answer={this.state.answer}
+                      question={this.state.question}
+                      notFirst={true}/>
+                    <span
+                    onClick={this.handleInputDelete(idx)}
+                    className="form-style__inputs-delete-button">&#10006;</span>
                     </div>
                   : <span className="noInput"></span>
               }
@@ -114,5 +87,4 @@ class StringInput extends Component {
     </div>)
   }
 }
-
 export default StringInput;

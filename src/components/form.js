@@ -1,42 +1,57 @@
 import React, { Component } from 'react';
 import CustInp from './input';
 import _ from 'lodash';
+let id = 0;
 
-class Form extends Component {
+class FormGen extends Component {
 
   constructor(props, context) {
     super(props);
 
     this.state = {
-      inputs: [{
-        inputName: null,
-        key: null
-      }]
-        };
+      inputs: [],
+      change: ''
+    };
+    this.handleInputDelete = this.handleInputDelete.bind(this)
+    this.handleTitleChange = this.handleTitleChange.bind(this)
+  }
 
+  componentDidUpdate(prevProps, prevState) {
+    if(prevState.inputs!==this.state.inputs){
+       this.setState({
+        change:this.state.inputs
+      })
+    }
   }
 
   handleAddInput = (e) => {
     let inputKey = e.target.dataset.key
     let inputType = e.target.dataset.inputtype
     this.setState({
-      inputs: this.state.inputs.concat({ inputName: inputType, key: inputKey })
+      inputs: this.state.inputs.concat({ inputName: inputType, key: inputKey, id:++id})
     });
     e.target.dataset.key++
     console.log(inputKey)
   }
-  handleInputDelete= (input) => () => {
+
+  handleInputDelete = (idx) => () => {
+    console.log('idx',idx);
+    let inp = this.state.inputs;
+    _.pullAt(inp, idx);
+    console.log('inp,',inp)
     this.setState({
-      inputs: _.reject(this.state.inputs, input)
+      inputs: inp
     });
   }
 
+  handleTitleChange(val, idx){
+    let inp_temp = this.state.inputs;
+    inp_temp[idx].name=val
+  }
 
+  render() {
 
-render() {
-
-
-  return (
+    return (
 
   <div className="form-style">
   <h2>
@@ -51,20 +66,29 @@ render() {
   </h2>
     <form className = "form-style__inputs">
       <div className="form-style__row">
-      {_.map(this.state.inputs,(
-        (input, idx) => (
-        <div key={idx} className="fullWidth">
+      {
+          _.map(this.state.inputs,((input, idx) => (
+        <div key={'key-'+input.id} className="fullWidth">
         {input.inputName !== null?
           <div>
-           <CustInp inType={input}/>
-           <span onClick={this.handleInputDelete(input)} className="form-style__inputs-delete-button">&#10006;</span>
+           <CustInp
+             handleTitle={this.handleTitleChange}
+             inType={input}
+             idx={idx}
+
+             />
+           <span
+             onClick={this.handleInputDelete(idx)}
+             className="form-style__inputs-delete-button">&#10006;</span>
            </div>
            :
            <span className="noInput"></span>
          }
         </div>
       )
-    ))}
+    ))
+
+  }
       </div>
     </form>
   </div>
@@ -73,4 +97,4 @@ render() {
 }
 }
 
-export default Form;
+export default FormGen;

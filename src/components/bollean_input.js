@@ -1,67 +1,76 @@
 import React, {Component} from 'react';
-import IntegerInput from './integer_input';
-import StringInput from './string_input';
+import SubInp from './subinputs';
 import _ from 'lodash';
+let id = 0
+
 class BooleanInput extends Component {
 
   constructor(props, context) {
     super(props);
 
     this.state = {
+      showSubinput: [],
+      change: '',
       boolean: '',
-      integerOperator:'',
-      integerValue: null,
-      showSubInput: [{
-        id: '',
-        key: ''
-      }],
       question:'',
       answer:''
     };
+    this.handleInputDelete = this.handleInputDelete.bind(this)
+    this.handleTitleChange = this.handleTitleChange.bind(this)
   }
-  handleInputDelete= (input) => () => {
-    this.setState({
-      showSubInput: _.reject(this.state.showSubInput, input)
-    });
-  }
-
   onHandleBooleanChange = (e) => {
     this.setState({boolean: [e.target.value]});
-  }
-
-  onHandleOperatorChange = (e) => {
-    if (e.target.value !== "Choose..")
-    this.setState({integerOperator: e.target.value});
-    console.log(this.state.integerOperator)
-  }
-
-  handleAddInput = (e) => {
-    let inputKey = e.target.dataset.key++
-    this.setState({
-            showSubInput: this.state.showSubInput.concat({ id: e.target.dataset.inputtype, key: inputKey })
-    });
-    e.target.dataset.value++
+    console.log(this.state.boolean)
   }
 
   handleQuestionChange = (question) => {
     this.setState({question});
   }
-  handleIntegerChange = (integerValue) => {
-    this.setState({integerValue});
+  
+  handleTitleChange= (e) => {
+    this.props.handleTitle(e.target.value, this.props.idx)
   }
+  handleAddInput = (e) => {
+    let inputKey = e.target.dataset.key
+    let inputType = e.target.dataset.inputtype
+    this.setState({
+      showSubinput: this.state.showSubinput.concat({ inputName: inputType, key: inputKey, id:++id})
+    });
+    e.target.dataset.key++
+    console.log(inputKey)
+  }
+  handleInputDelete = (idx) => () => {
+    let inp = this.state.showSubinput;
+    _.pullAt(inp, idx);
+    this.setState({
+      inputs: inp
+    });
+  }
+
+  handleTitleChange(val, idx){
+    let inp_temp = this.state.inputs;
+    inp_temp[idx].name=val
+  }
+
 
 
   render() {
     return (
-      <div className="form-style__inputs form-style__inputs-subinput">
-      {!this.props.notFirst ? <input type="text" placeholder="Title" className="form-style__inputs-input form-style__inputs-input-title-notfirst"/> :  <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
+      <div className="form-style__inputs">
+      {!this.props.notFirst  ? <input type="text"
+        onChange={this.handleTitleChange}
+        placeholder="Title"
+        className="form-style__inputs-input form-style__inputs-input-title"
+        defaultValue={this.props.inType && this.props.inType.name ? this.props.inType.name : ''}
+        /> :
+      <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
       <input type="text" placeholder="Type your question here" className="form-style__inputs-input form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
-      <div className="form-style__inputs-input form-style__inputs-input-radio-buttons">
+       <div className="form-style__inputs-input form-style__inputs-input-radio-buttons">
         <div className="form-style__inputs-input-radio-buttons-choose" >Choose your desired answer</div>
-        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/>
+        <div className="form-style__inputs-input-radio-buttons-button" onChange={this.handleTitleChange}><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/>
           <span>Yes</span>
         </div>
-        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/>
+        <div className="form-style__inputs-input-radio-buttons-button" onChange={this.handleTitleChange}><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/>
           <span>No</span>
         </div>
       </div>
@@ -76,41 +85,21 @@ class BooleanInput extends Component {
         </div>
       </div>
       {
-        this.state.showSubInput.map((sub, i) => (
+        this.state.showSubinput.map((sub, idx) => (
           <div>
           {
-            sub.id === 'boolean'
-              ? <div className ="relative-container">
-                <BooleanInput answer={this.state.boolean} question={this.state.question} notFirst={true}/>
-                <span onClick={this.handleInputDelete(sub)} className="form-style__inputs-delete-button">&#10006;</span>
-                </div>
-              : <span className="noInput"></span>
-          }
-        </div>
-      ))
-      }
-      {
-        this.state.showSubInput.map((sub, i) => (
-          <div>
-          {
-            sub.id === 'integer'
-              ? <div className ="relative-container">
-                <IntegerInput answer={this.state.boolean} question={this.state.question} notFirst={true}/>
-                <span onClick={this.handleInputDelete(sub)} className="form-style__inputs-delete-button">&#10006;</span>
-                </div>
-              : <span className="noInput"></span>
-          }
-        </div>
-      ))
-      }
-      {
-        this.state.showSubInput.map((sub, i) => (
-          <div>
-          {
-            sub.id === 'string'
-              ? <div className ="relative-container">
-                <StringInput answer={this.state.boolean} question={this.state.question} notFirst={true}/>
-                <span onClick={this.handleInputDelete(sub)} className="form-style__inputs-delete-button">&#10006;</span>
+            sub.inputName !== null
+              ?
+                <div className="relative-container">
+                <SubInp
+                  subInType={sub}
+                  idx={idx}
+                  answer={this.state.boolean}
+                  question={this.state.question}
+                  notFirst={true}/>
+                <span
+                onClick={this.handleInputDelete(idx)}
+                className="form-style__inputs-delete-button">&#10006;</span>
                 </div>
               : <span className="noInput"></span>
           }

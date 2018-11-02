@@ -3,15 +3,15 @@ import BooleanInput from './bollean_input'
 import IntegerInput from './integer_input'
 import StringInput from './string_input'
 
-class CustInp extends Component {
+class SubInp extends Component {
 
   constructor(props, context) {
     super(props);
 
     this.state = {
-    input: [{
-      inputType: this.props.inType.inputName,
-      inputKey: this.props.inType.key
+    subInput: [{
+      subInputType: this.props.subInType.inputName,
+      subInputKey: this.props.subInType.key
     }]
     }
   }
@@ -23,18 +23,22 @@ class CustInp extends Component {
   handleTitleChange= (e) => {
     this.props.handleTitle(e.target.value, this.props.idx)
   }
+
   render() {
     return (
     <div key={'key-'+this.props.idx}>
       <div>
         <div>
           {
-            this.props.inType.inputName === 'boolean'
-              ? <div  className="form-style__inputs form-style__inputs-border">
+            this.props.subInType.inputName === 'boolean'
+              ? <div>
                 <BooleanInput
                   idx={this.props.idx}
-                  handleTitle={this.props.handleTitle}
-                  inType={this.props.inType}
+                  subInType={this.props.subInType}
+                  answer={this.props.answer}
+                  question={this.props.question}
+                  operator={this.state.integerOperator}
+                  notFirst={true}
               />
               </div>
               : <span className="noInput"></span>
@@ -45,11 +49,14 @@ class CustInp extends Component {
       <div>
         <div>
             {
-              this.props.inType.inputName === 'integer'
+              this.props.subInType.inputName === 'integer'
                 ? <IntegerInput
-                    idx={this.props.idx}
-                    handleTitle={this.props.handleTitle}
-                    inType={this.props.inType}
+                  idx={this.props.idx}
+                  subInType={this.props.subInType}
+                  answer={this.props.answer}
+                  question={this.props.question}
+                  operator={this.state.integerOperator}
+                  notFirst={true}
                 />
                 : <span className="noInput"></span>
             }
@@ -60,11 +67,14 @@ class CustInp extends Component {
 
             <div>
             {
-              this.props.inType.inputName === 'string'
+              this.props.subInType.inputName === 'string'
                 ? <StringInput
-                    idx={this.props.idx}
-                    handleTitle={this.props.handleTitle}
-                    inType={this.props.inType}
+                  idx={this.props.idx}
+                  subInType={this.props.subInType}
+                  answer={this.props.answer}
+                  question={this.props.question}
+                  operator={this.state.integerOperator}
+                  notFirst={true}
                 />
                 : <span className="noInput"></span>
             }
@@ -73,5 +83,4 @@ class CustInp extends Component {
     </div>)
   }
 }
-
-export default CustInp;
+export default SubInp;
