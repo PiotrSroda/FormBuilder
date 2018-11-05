@@ -26,7 +26,7 @@ class BooleanInput extends Component {
   handleQuestionChange = (question) => {
     this.setState({question});
   }
-  
+
   handleTitleChange= (e) => {
     this.props.handleTitle(e.target.value, this.props.idx)
   }
@@ -86,7 +86,7 @@ class BooleanInput extends Component {
       </div>
       {
         this.state.showSubinput.map((sub, idx) => (
-          <div>
+          <div className="fullWidth">
           {
             sub.inputName !== null
               ?

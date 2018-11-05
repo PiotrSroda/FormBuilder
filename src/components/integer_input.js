@@ -73,7 +73,7 @@ class IntegerInput extends Component {
           </div>
           {
             this.state.showSubinput.map((sub, idx) => (
-              <div>
+              <div className="fullWidth">
               {
                 sub.inputName !== null
                   ?

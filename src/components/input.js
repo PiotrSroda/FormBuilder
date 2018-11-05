@@ -9,10 +9,10 @@ class CustInp extends Component {
     super(props);
 
     this.state = {
-    input: [{
-      inputType: this.props.inType.inputName,
-      inputKey: this.props.inType.key
-    }]
+    input: {
+      inputType: this.props.inType.input,
+      inputKey: this.props.idx
+      }
     }
   }
 
@@ -23,21 +23,34 @@ class CustInp extends Component {
   handleTitleChange= (e) => {
     this.props.handleTitle(e.target.value, this.props.idx)
   }
+
+  handleInputDelete = () => {
+  this.setState({
+    input:{
+      inputType: '',
+      inputKey: ''
+    }
+  })
+  }
+
   render() {
     return (
-    <div key={'key-'+this.props.idx}>
+    <div className='form-style__inputs form-style__inputs-subinput'>
       <div>
         <div>
           {
-            this.props.inType.inputName === 'boolean'
+            this.state.input.inputType === 'boolean'
               ? <div  className="form-style__inputs form-style__inputs-border">
                 <BooleanInput
                   idx={this.props.idx}
                   handleTitle={this.props.handleTitle}
                   inType={this.props.inType}
               />
+              <span
+                onClick={this.handleInputDelete}
+                className="form-style__inputs-delete-button">&#10006;</span>
               </div>
-              : <span className="noInput"></span>
+              : null
           }
         </div>
       </div>
@@ -45,13 +58,20 @@ class CustInp extends Component {
       <div>
         <div>
             {
-              this.props.inType.inputName === 'integer'
-                ? <IntegerInput
+                this.state.input.inputType === 'integer'
+                ?
+                <div className="form-style__inputs form-style__inputs-border">
+                <IntegerInput
                     idx={this.props.idx}
                     handleTitle={this.props.handleTitle}
                     inType={this.props.inType}
                 />
-                : <span className="noInput"></span>
+                <span
+                  onClick={this.handleInputDelete}
+                  className="form-style__inputs-delete-button">&#10006;</span>
+                  </div>
+                : null
+
             }
           </div>
 
@@ -60,13 +80,19 @@ class CustInp extends Component {
 
             <div>
             {
-              this.props.inType.inputName === 'string'
-                ? <StringInput
+                this.state.input.inputType === 'string'
+                ?
+                <div className="form-style__inputs form-style__inputs-border">
+                <StringInput
                     idx={this.props.idx}
                     handleTitle={this.props.handleTitle}
                     inType={this.props.inType}
                 />
-                : <span className="noInput"></span>
+                <span
+                  onClick={this.handleInputDelete}
+                  className="form-style__inputs-delete-button">&#10006;</span>
+                </div>
+                : null
             }
           </div>
       </div>
