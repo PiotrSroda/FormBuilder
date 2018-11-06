@@ -35,7 +35,7 @@ class CustInp extends Component {
 
   render() {
     return (
-    <div className='form-style__inputs form-style__inputs-subinput'>
+    <div className='fullWidth'>
       <div>
         <div>
           {

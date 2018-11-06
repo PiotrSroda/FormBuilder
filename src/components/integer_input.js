@@ -49,27 +49,29 @@ class IntegerInput extends Component {
   render() {
     return (
       <div className="form-style__inputs form-style__inputs-subinput">
-          {!this.props.notFirst  ? <input type="text" placeholder="Title" className="form-style__inputs-input form-style__inputs-input-title-notfirst"/> :  <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
-          <input type="text" placeholder="Type your question here" className="form-style__inputs-input form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
-          <div className="form-style__inputs-input form-style__inputs-input-numbers">
+        <div className="form-style__inputs-container">
+          {!this.props.notFirst  ? <div
+            className="form-style__inputs-input form-style__inputs-input-title"
+            >New Form</div> :  <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
+          <input type="text" placeholder="Type your question here" className="form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
+          <div className="form-style__inputs-input-numbers">
             <div className="form-style__inputs-input-numbers-choose">Choose a number and an operator</div>
-            <select name="operators" class="form-style__inputs-input-select" onChange={this.onHandleOperatorChange}>
+            <select name="operators" class="form-style__inputs-input-numbers-select" onChange={this.onHandleOperatorChange}>
               <option>Choose..</option>
               <option value="equal to" >Equal to</option>
               <option value="greater than" >Greater than</option>
               <option value="lower than" >Lower than</option>
             </select>
-            <input type="number" min="0" step="1" placeholder="Type the number" className="form-style__inputs-input form-style__inputs-input-numbers-answer" value={this.state.integerValue} onChange={event => this.handleIntegerChange(event.target.value)}/>
+            <input type="number" min="0" step="1" placeholder="Answer" className="form-style__inputs-input-numbers-answer" value={this.state.integerValue} onChange={event => this.handleIntegerChange(event.target.value)}/>
           </div>
-          <div className="form-style__inputs-input-dropbtn form-style__inputs-input-dropbtn">
-            <div className="dropdown">
-              <div className="dropbtn">+</div>
-              <div className="dropdown-content">
-                <span className="dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
-                <span className="dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
-                <span className="dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
+          </div>
+          <div className="form-style__inputs__dropdown">
+              <div className="form-style__inputs__dropdown-dropbutton">+</div>
+              <div className="form-style__inputs__dropdown-content">
+                <span className="form-style__inputs__dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
+                <span className="form-style__inputs__dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
+                <span className="form-style__inputs__dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
               </div>
-            </div>
           </div>
           {
             this.state.showSubinput.map((sub, idx) => (

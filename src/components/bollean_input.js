@@ -56,33 +56,30 @@ class BooleanInput extends Component {
 
   render() {
     return (
-      <div className="form-style__inputs">
-      {!this.props.notFirst  ? <input type="text"
-        onChange={this.handleTitleChange}
-        placeholder="Title"
+      <div className="form-style__inputs form-style__inputs-subinput">
+        <div className="form-style__inputs-container">
+      {!this.props.notFirst  ? <div
         className="form-style__inputs-input form-style__inputs-input-title"
-        defaultValue={this.props.inType && this.props.inType.name ? this.props.inType.name : ''}
-        /> :
+        >New Form</div> :
       <div className="form-style__inputs-input form-style__inputs-input-question-asked">"{this.props.question}" {!this.props.operator ? `is equal to` : `is ${this.props.operator}`} "{this.props.answer}"</div>}
-      <input type="text" placeholder="Type your question here" className="form-style__inputs-input form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
-       <div className="form-style__inputs-input form-style__inputs-input-radio-buttons">
+    <input type="text" placeholder="Type your question here" className="form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
+       <div className=" form-style__inputs-input-radio-buttons">
         <div className="form-style__inputs-input-radio-buttons-choose" >Choose your desired answer</div>
-        <div className="form-style__inputs-input-radio-buttons-button" onChange={this.handleTitleChange}><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/>
+        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/>
           <span>Yes</span>
         </div>
-        <div className="form-style__inputs-input-radio-buttons-button" onChange={this.handleTitleChange}><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/>
+        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/>
           <span>No</span>
         </div>
       </div>
-      <div className="form-style__inputs-input-dropbtn form-style__inputs-input-dropbtn">
-        <div className="dropdown">
-          <div className="dropbtn">+</div>
-          <div className="dropdown-content">
-            <span className="dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
-            <span className="dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
-            <span className="dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
+      </div>
+      <div className="form-style__inputs__dropdown">
+          <div className="form-style__inputs__dropdown-dropbutton">+</div>
+          <div className="form-style__inputs__dropdown-content">
+            <span className="form-style__inputs__dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
+            <span className="form-style__inputs__dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
+            <span className="form-style__inputs__dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
           </div>
-        </div>
       </div>
       {
         this.state.showSubinput.map((sub, idx) => (

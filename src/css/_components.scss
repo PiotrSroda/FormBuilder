@@ -32,6 +32,16 @@
     display: flex;
     position: relative;
     flex-wrap: wrap;
+    &-container{
+      flex-wrap: wrap;
+          align-items: stretch;
+          width: 75%;
+          display: flex;
+          margin-bottom: 1rem;
+          margin-top: 1rem;
+          border-bottom: 1px solid var(--color-grey-light-4);
+          padding-bottom: 5rem;
+    }
     &-subinput{
       width: 100%;
     }
@@ -39,16 +49,17 @@
       border: 1px solid var(--color-grey-dark-1);
       padding: 3rem;
       margin-bottom: 2rem;
+      z-index: 3;
     }
       &-input {
     outline: none;
     display: block;
     padding: 7px;
     border: none;
-    border-bottom: 1px solid #ddd;
     background: transparent;
     margin-bottom: 1.5rem;
     margin-right: 5rem;
+
     &-title{
       width: 100%;
       font-weight: 700;
@@ -65,49 +76,13 @@
       font-size: 3rem;
     }
     &-question{
-      width: 30%;
+      width: 50%;
       font-weight: 100;
       font-size: 2rem;
-      border-bottom: none;
-    }
-    &-answer{
-      width: 30%;
-      font-weight: 100;
-      font-size: 2rem;
-      border-bottom: none;
-    }
-    &-dropbtn{
-      outline: none;
-      display: block;
-      padding: 0;
       border: none;
-      background: transparent;
-      margin-bottom: 0;
-      margin-right: 0;
-      padding-left: 8rem;
-      width: 30%;
-      height: auto;
-      & .dropdown {
-        box-shadow: none;
-        &:hover .dropbtn{
-          background-color: var(--color-grey-dark-1);
-        }
-        .dropbtn {
-          color: var(--color-grey-dark-1);
-          border: 1px solid #ddd;
-          &:hover{
-            background-color: var(--color-grey-dark-1);
-          }
-        }
-        &-content-item {
-          color: var(--color-grey-dark-1);
+      padding: 7px;
+      outline: none;
 
-          &:hover{
-            color: var(--color-grey-light-1);
-            background-color: var(--color-grey-dark-1);
-          }
-        }
-      }
     }
     &-radio-buttons{
       display: flex;
@@ -128,19 +103,22 @@
       &-numbers {
         display: flex;
         position: relative;
+        width: 35%;
+        margin-top: 1.5rem;
         border-bottom: none;
-        justify-content: space-between;
         flex-wrap: wrap;
-        width: 30%;
         &-choose{
-          width: 100%;
           margin-bottom: 1rem;
           font-size: 1.5rem;
+          margin-right: 1rem;
         }
         &-answer{
+          margin-right: 1rem;
+          width: 30%;
           font-size: 1.5rem;
-          margin-bottom: 0;
-          margin-right: 0;
+        }
+        &-select{
+          margin-right: 1rem;
         }
       }
 
@@ -159,6 +137,20 @@
       font-size: 1.5rem;
       &:hover{
         color: var(--color-grey-dark-1)
+      }
+    }
+    &__dropdown{
+      position: relative;
+      margin-top: 3rem;
+      z-index: 2;
+      &-dropbutton{
+        position: absolute;
+        left: 50%;
+      }
+      &-content{
+        &-item{
+
+        }
       }
     }
   }
