@@ -30,16 +30,17 @@ class FormGen extends Component {
     return (
 
   <div className="form-style">
-  <h2>
-    <div className="dropdown">
-      <div className="dropbtn">+</div>
-        <div className="dropdown-content">
-          <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "boolean" data-key = "0">Yes/no question</span>
-          <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "integer" data-key = "0">Number based question</span>
-          <span className="dropdown-content-item" onClick={this.handleAddInput} data-inputtype = "string" data-key = "0">Open question</span>
-        </div>
-    </div>
-  </h2>
+  <div className="slider-menu">
+  <input type="checkbox" className="slider-menu__checkbox" id="slide-toggle" value=''/>
+      <label htmlFor="slide-toggle" className="slider-menu__button"><span className="slider-menu__icon">&nbsp;</span></label>
+      
+      <div className="slider-menu__item-container">
+            <span className="slider-menu__item" onClick={this.handleAddInput} data-inputtype = "boolean" data-key = "0">Yes/no question</span>
+            <span className="slider-menu__item" onClick={this.handleAddInput} data-inputtype = "integer" data-key = "0">Number based question</span>
+            <span className="slider-menu__item" onClick={this.handleAddInput} data-inputtype = "string" data-key = "0">Open question</span>
+      </div>
+
+  </div>
     <form className = "form-style__inputs">
       <div className="form-style__row">
         {this.state.inputs.map((input, indx) => (
