@@ -5,14 +5,23 @@ import StringInput from './string_input'
 
 class SubInp extends Component {
 
+  shouldComponentUpdate(nextProps, nextState) {
+    if (this.props !== nextProps) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+
   constructor(props, context) {
     super(props);
 
     this.state = {
-    subInput: [{
+    subInput: {
       subInputType: this.props.subInType.inputName,
       subInputKey: this.props.subInType.key
-    }]
+    }
     }
   }
 
@@ -24,22 +33,34 @@ class SubInp extends Component {
     this.props.handleTitle(e.target.value, this.props.idx)
   }
 
+  handleInputDelete = () => {
+  this.setState({
+    subInput:{
+      subInputType: '',
+      subInputKey: ''
+    }
+  })
+  }
+
   render() {
     return (
     <div key={'key-'+this.props.idx}>
       <div>
         <div>
           {
-            this.props.subInType.inputName === 'boolean'
+            this.state.subInput.subInputType === 'boolean'
               ? <div>
                 <BooleanInput
                   idx={this.props.idx}
                   subInType={this.props.subInType}
                   answer={this.props.answer}
                   question={this.props.question}
-                  operator={this.state.integerOperator}
+                  operator={this.props.operator}
                   notFirst={true}
               />
+              <span
+                onClick={this.handleInputDelete}
+                className="form-style__inputs-delete-button">&#10006;</span>
               </div>
               : <span className="noInput"></span>
           }
@@ -49,15 +70,20 @@ class SubInp extends Component {
       <div>
         <div>
             {
-              this.props.subInType.inputName === 'integer'
-                ? <IntegerInput
+              this.state.subInput.subInputType === 'integer'
+                ? <div>
+                  <IntegerInput
                   idx={this.props.idx}
                   subInType={this.props.subInType}
                   answer={this.props.answer}
                   question={this.props.question}
-                  operator={this.state.integerOperator}
+                  operator={this.props.operator}
                   notFirst={true}
                 />
+                <span
+                  onClick={this.handleInputDelete}
+                  className="form-style__inputs-delete-button">&#10006;</span>
+                </div>
                 : <span className="noInput"></span>
             }
           </div>
@@ -67,15 +93,20 @@ class SubInp extends Component {
 
             <div>
             {
-              this.props.subInType.inputName === 'string'
-                ? <StringInput
+              this.state.subInput.subInputType === 'string'
+                ? <div>
+                  <StringInput
                   idx={this.props.idx}
                   subInType={this.props.subInType}
                   answer={this.props.answer}
                   question={this.props.question}
-                  operator={this.state.integerOperator}
+                  operator={this.props.operator}
                   notFirst={true}
                 />
+                <span
+                onClick={this.handleInputDelete}
+                className="form-style__inputs-delete-button">&#10006;</span>
+                </div>
                 : <span className="noInput"></span>
             }
           </div>

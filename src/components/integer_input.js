@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import SubInp from './subinputs';
 import _ from 'lodash';
-let id = 0
+
 class IntegerInput extends Component {
+
+  
 
   constructor(props, context) {
     super(props);
@@ -13,25 +15,19 @@ class IntegerInput extends Component {
       integerValue: null,
       question:'',
     };
-    this.handleInputDelete = this.handleInputDelete.bind(this)
+
   }
 
   handleAddInput = (e) => {
     let inputKey = e.target.dataset.key
     let inputType = e.target.dataset.inputtype
     this.setState({
-      showSubinput: this.state.showSubinput.concat({ inputName: inputType, key: inputKey, id:++id})
+      showSubinput: this.state.showSubinput.concat({ inputName: inputType, key: inputKey})
     });
     e.target.dataset.key++
     console.log(inputKey)
   }
-  handleInputDelete = (idx) => () => {
-    let inp = this.state.showSubinput;
-    _.pullAt(inp, idx);
-    this.setState({
-      inputs: inp
-    });
-  }
+
 
   onHandleOperatorChange = (e) => {
     if (e.target.value !== "Choose..")
@@ -56,7 +52,7 @@ class IntegerInput extends Component {
           <input type="text" placeholder="Type your question here" className="form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
           <div className="form-style__inputs-input-numbers">
             <div className="form-style__inputs-input-numbers-choose">Choose a number and an operator</div>
-            <select name="operators" class="form-style__inputs-input-numbers-select" onChange={this.onHandleOperatorChange}>
+            <select name="operators" className="form-style__inputs-input-numbers-select" onChange={this.onHandleOperatorChange}>
               <option>Choose..</option>
               <option value="equal to" >Equal to</option>
               <option value="greater than" >Greater than</option>
@@ -87,9 +83,6 @@ class IntegerInput extends Component {
                       operator={this.state.integerOperator}
                       question={this.state.question}
                       notFirst={true}/>
-                    <span
-                    onClick={this.handleInputDelete(idx)}
-                    className="form-style__inputs-delete-button">&#10006;</span>
                     </div>
                   : <span className="noInput"></span>
               }

@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import SubInp from './subinputs';
 import _ from 'lodash';
-let id = 0
+
 
 class StringInput extends Component {
 
+  
   constructor(props, context) {
     super(props);
 
@@ -13,24 +14,18 @@ class StringInput extends Component {
       question:'',
       answer:''
     };
-    this.handleInputDelete = this.handleInputDelete.bind(this)
+
   }
   handleAddInput = (e) => {
     let inputKey = e.target.dataset.key
     let inputType = e.target.dataset.inputtype
     this.setState({
-      showSubinput: this.state.showSubinput.concat({ inputName: inputType, key: inputKey, id:++id})
+      showSubinput: this.state.showSubinput.concat({ inputName: inputType, key: inputKey})
     });
     e.target.dataset.key++
     console.log(inputKey)
   }
-  handleInputDelete = (idx) => () => {
-    let inp = this.state.showSubinput;
-    _.pullAt(inp, idx);
-    this.setState({
-      inputs: inp
-    });
-  }
+
 
   handleQuestionChange = (question) => {
     this.setState({question});
@@ -72,9 +67,6 @@ class StringInput extends Component {
                       answer={this.state.answer}
                       question={this.state.question}
                       notFirst={true}/>
-                    <span
-                    onClick={this.handleInputDelete(idx)}
-                    className="form-style__inputs-delete-button">&#10006;</span>
                     </div>
                   : <span className="noInput"></span>
               }
