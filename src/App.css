@@ -210,10 +210,58 @@ input {
     .form-style__inputs__dropdown {
       position: relative;
       margin-top: 3rem;
-      z-index: 2; }
+      width: 25%;
+      display: flex;
+      flex-direction: column; }
+      .form-style__inputs__dropdown-iconbox {
+        height: 2rem; }
       .form-style__inputs__dropdown-dropbutton {
         position: absolute;
-        left: 50%; }
+        left: 25%;
+        text-align: center;
+        cursor: pointer;
+        border-bottom: 1px solid #ccc;
+        width: 13rem;
+        -webkit-transition: all .2s;
+        transition: all .2s;
+        top: -1.2rem; }
+      .form-style__inputs__dropdown-checkbox {
+        opacity: 0;
+        position: absolute; }
+      .form-style__inputs__dropdown-dropbutton:hover ~ .form-style__inputs__dropdown-content {
+        opacity: 1;
+        z-index: 2; }
+      .form-style__inputs__dropdown-dropicon {
+        font-size: 1.4rem;
+        user-select: none; }
+      .form-style__inputs__dropdown-content {
+        display: flex;
+        z-index: -90;
+        opacity: 0;
+        margin-top: 1rem;
+        position: relative;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 11rem;
+        font-size: 1.5rem;
+        margin-left: 4.5rem;
+        transition: opacity .3s; }
+        .form-style__inputs__dropdown-content:hover {
+          opacity: 1;
+          z-index: 2; }
+        .form-style__inputs__dropdown-content-item {
+          box-shadow: 3px 4px 10px 0px rgba(0, 0, 0, 0.08);
+          width: 81%;
+          transition: all .2s;
+          cursor: pointer;
+          display: block;
+          user-select: none; }
+          .form-style__inputs__dropdown-content-item:hover {
+            background-color: var(--color-primary);
+            color: var(--color-grey-light-1);
+            transform: scale(1.1); }
+          .form-style__inputs__dropdown-content-item:focus, .form-style__inputs__dropdown-content-item:active {
+            transform: translateY(0.5rem); }
   .form-style__row {
     height: auto;
     width: 100%;
@@ -254,8 +302,8 @@ input {
     transition: all .2s; }
     .slider-menu__button:hover {
       background: var(--color-primary-light); }
-    .slider-menu__button:active {
-      background: var(--color-primary); }
+    .slider-menu__button:focus, .slider-menu__button:active {
+      background: var(--color-primary-dark); }
   .slider-menu__icon {
     position: absolute;
     top: 50%;

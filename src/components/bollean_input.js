@@ -59,7 +59,7 @@ class BooleanInput extends Component {
     <input type="text" placeholder="Type your question here" className="form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
        <div className=" form-style__inputs-input-radio-buttons">
         <div className="form-style__inputs-input-radio-buttons-choose" >Choose your desired answer</div>
-        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/>
+        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange} checked={true}/>
           <span>Yes</span>
         </div>
         <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/>
@@ -68,12 +68,12 @@ class BooleanInput extends Component {
       </div>
       </div>
       <div className="form-style__inputs__dropdown">
-          <div className="form-style__inputs__dropdown-dropbutton">+</div>
-          <div className="form-style__inputs__dropdown-content">
-            <span className="form-style__inputs__dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
-            <span className="form-style__inputs__dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
-            <span className="form-style__inputs__dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
-          </div>
+            <div className="form-style__inputs__dropdown-dropbutton"><div className="form-style__inputs__dropdown-dropicon">Choose next input</div></div>
+              <div className="form-style__inputs__dropdown-content">
+                <span className="form-style__inputs__dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
+                <span className="form-style__inputs__dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
+                <span className="form-style__inputs__dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
+              </div>
       </div>
       {
         this.state.showSubinput.map((sub, idx) => (

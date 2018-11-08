@@ -5,7 +5,7 @@ import _ from 'lodash';
 
 class StringInput extends Component {
 
-  
+
   constructor(props, context) {
     super(props);
 
@@ -47,12 +47,12 @@ class StringInput extends Component {
           <input type="text" placeholder="Type your answer here" className="form-style__inputs-input-question" value={this.state.answer} onChange={event => this.handleAnswerChange(event.target.value)}/>
           </div>
           <div className="form-style__inputs__dropdown">
-              <div className="form-style__inputs__dropdown-dropbutton">+</div>
-              <div className="form-style__inputs__dropdown-content">
-                <span className="form-style__inputs__dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
-                <span className="form-style__inputs__dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
-                <span className="form-style__inputs__dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
-              </div>
+                <div className="form-style__inputs__dropdown-dropbutton"><div className="form-style__inputs__dropdown-dropicon">Choose next input</div></div>
+                  <div className="form-style__inputs__dropdown-content">
+                    <span className="form-style__inputs__dropdown-content-item" data-inputtype="boolean" data-key="0" onClick={this.handleAddInput}>Yes/no question</span>
+                    <span className="form-style__inputs__dropdown-content-item" data-inputtype="integer" data-key="0" onClick={this.handleAddInput}>Number based question</span>
+                    <span className="form-style__inputs__dropdown-content-item" data-inputtype="string" data-key="0" onClick={this.handleAddInput}>Open question</span>
+                  </div>
           </div>
           {
             this.state.showSubinput.map((sub, idx) => (
