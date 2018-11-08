@@ -59,7 +59,7 @@ class BooleanInput extends Component {
     <input type="text" placeholder="Type your question here" className="form-style__inputs-input-question" value={this.state.question} onChange={event => this.handleQuestionChange(event.target.value)}/>
        <div className=" form-style__inputs-input-radio-buttons">
         <div className="form-style__inputs-input-radio-buttons-choose" >Choose your desired answer</div>
-        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange} checked={true}/>
+        <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="yes" onChange={this.onHandleBooleanChange}/>
           <span>Yes</span>
         </div>
         <div className="form-style__inputs-input-radio-buttons-button"><input type="radio" name="field2" value="no" onChange={this.onHandleBooleanChange}/>
